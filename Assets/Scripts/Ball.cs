@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<GameManager>().UpdateScore();
         ResetBall();
     }
 

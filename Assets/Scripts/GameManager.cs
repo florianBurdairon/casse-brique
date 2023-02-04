@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public int level = 1;
+    public int level = 0;
     public int score = 0;
     public int lives = 3;
 
@@ -33,19 +33,14 @@ public class GameManager : MonoBehaviour
         this.score = 0;
         this.lives = 3;
 
-        LoadLevel(1);
+        LoadLevel(0);
     }
 
     private void LoadLevel(int level)
     {
         this.level= level;
 
-        if (this.level > 2)
-        {
-            SceneManager.LoadScene("Level1");
-        }
-
-        SceneManager.LoadScene("Level" + level);
+        SceneManager.LoadScene("Level" + (level % 5 + 1));
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
@@ -67,7 +62,7 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
-    private void UpdateScore()
+    public void UpdateScore()
     {
         this.scoreNLives.text = "Score : " + this.score + "  -  Lives : " + this.lives;
     }
@@ -75,6 +70,7 @@ public class GameManager : MonoBehaviour
     public void Miss()
     {
         this.lives--;
+        UpdateScore();
 
         if (this.lives > 0)
             ResetLevel();
