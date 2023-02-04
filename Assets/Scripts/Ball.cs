@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public new Rigidbody2D rigidbody { get; private set; }
     public float speed = 500f;
+    public float maxVelocity = 15f;
 
     private void Awake()
     {
@@ -16,6 +17,13 @@ public class Ball : MonoBehaviour
     {
         FindObjectOfType<GameManager>().UpdateScore();
         ResetBall();
+    }
+
+    private void Update()
+    {
+        if(this.rigidbody.velocity.magnitude > maxVelocity) {
+            this.rigidbody.velocity = Vector3.ClampMagnitude(this.rigidbody.velocity, maxVelocity);
+        }
     }
 
     private void SetRandomTrajectory()

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Paddle : MonoBehaviour
 {
     public new Rigidbody2D rigidbody { get; private set; }
     public Vector2 direction { get; private set; }
+    public float maxX = 15.3f;
     public float speed = 30f;
     public float maxBounceAngle = 75f;
 
@@ -16,7 +18,14 @@ public class Paddle : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+        float movementHorizontal = Input.GetAxis("Horizontal");
+        if((movementHorizontal > 0 && transform.position.x < maxX) || (movementHorizontal < 0 && transform.position.x > -maxX))
+        {
+            this.transform.position += Vector3.right * movementHorizontal * this.speed * Time.deltaTime;
+        }
+
+
+        /*if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
         {
             this.direction = Vector2.left;
         }
@@ -27,15 +36,15 @@ public class Paddle : MonoBehaviour
         else
         {
             this.direction = Vector2.zero;
-        }
+        }*/
     }
 
     private void FixedUpdate()
-    {
-        if(this.direction != Vector2.zero)
+    {   
+        /*if(this.direction != Vector2.zero)
         {
             this.rigidbody.AddForce(this.direction * this.speed);
-        }
+        }*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -62,6 +71,6 @@ public class Paddle : MonoBehaviour
     public void ResetPaddle()
     {
         this.transform.position = new Vector2(0f, this.transform.position.y);
-        this.rigidbody.velocity = Vector2.zero;
+        //this.rigidbody.velocity = Vector2.zero;
     }
 }
