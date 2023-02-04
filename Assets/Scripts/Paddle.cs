@@ -23,28 +23,6 @@ public class Paddle : MonoBehaviour
         {
             this.transform.position += Vector3.right * movementHorizontal * this.speed * Time.deltaTime;
         }
-
-
-        /*if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            this.direction = Vector2.left;
-        }
-        else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            this.direction = Vector2.right;
-        }
-        else
-        {
-            this.direction = Vector2.zero;
-        }*/
-    }
-
-    private void FixedUpdate()
-    {   
-        /*if(this.direction != Vector2.zero)
-        {
-            this.rigidbody.AddForce(this.direction * this.speed);
-        }*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -71,6 +49,5 @@ public class Paddle : MonoBehaviour
     public void ResetPaddle()
     {
         this.transform.position = new Vector2(0f, this.transform.position.y);
-        //this.rigidbody.velocity = Vector2.zero;
     }
 }
