@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public Paddle paddle { get; private set; }
     public Brick[] bricks { get; private set; }
 
-    [SerializeField]
     public Text scoreNLives { get; private set; }
 
     private void Awake()
@@ -25,10 +24,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        NewGame();
+        //NewGame();
     }
 
-    private void NewGame()
+    public void NewGame()
     {
         this.score = 0;
         this.lives = 3;
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        NewGame();
+        SceneManager.LoadScene("EndGame");
     }
 
     public void UpdateScore()
