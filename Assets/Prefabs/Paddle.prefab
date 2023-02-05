@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885505108985e7949a68551077bfd292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxX: 17.5
+  maxX: 14.5
   speed: 30
   maxBounceAngle: 75
