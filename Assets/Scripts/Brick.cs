@@ -6,6 +6,7 @@ public class Brick : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer { get; private set; }
     public Sprite[] states;
+    public Sprite unbreakableSprite;
     public int health { get; private set; }
     public int points = 100;
     public bool unbreakable;
@@ -22,10 +23,16 @@ public class Brick : MonoBehaviour
             this.health = this.states.Length;
             this.spriteRenderer.sprite = this.states[this.health -1];
         }
+        else
+        {
+            this.spriteRenderer.sprite = this.unbreakableSprite;
+        }
     }
 
     private void Hit()
     {
+        FindObjectOfType<SoundManager>().PlayBallHitBrick();
+
         if (this.unbreakable)
             return;
 

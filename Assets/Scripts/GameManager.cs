@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public Text scoreNLives { get; private set; }
 
+    public SoundManager soundManager { get; private set; }
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //NewGame();
+        this.soundManager = FindObjectOfType<SoundManager>();
     }
 
     public void NewGame()
@@ -39,7 +41,10 @@ public class GameManager : MonoBehaviour
     {
         this.level= level;
 
-        SceneManager.LoadScene("Level" + (level % 5 + 1));
+        if (this.lives < 3)
+            this.lives++;
+
+        SceneManager.LoadScene("Level" + (level % 7 + 1));
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
@@ -63,11 +68,13 @@ public class GameManager : MonoBehaviour
 
     public void UpdateScore()
     {
-        this.scoreNLives.text = "Score : " + this.score + "  -  Lives : " + this.lives;
+        this.scoreNLives.text = "Level : " + (this.level + 1) + "  -  Score : " + this.score + "  -  Lives : " + this.lives;
     }
 
     public void Miss()
     {
+        this.soundManager.PlayLoseOneLife();
+
         this.lives--;
         UpdateScore();
 

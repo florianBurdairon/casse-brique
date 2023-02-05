@@ -11,9 +11,12 @@ public class Paddle : MonoBehaviour
     public float speed = 30f;
     public float maxBounceAngle = 75f;
 
+    public SoundManager soundManager { get; private set; }
+
     private void Awake()
     {
         this.rigidbody = GetComponent<Rigidbody2D>();
+        this.soundManager = FindObjectOfType<SoundManager>();
     }
 
     private void Update()
@@ -31,6 +34,8 @@ public class Paddle : MonoBehaviour
 
         if(ball != null)
         {
+            soundManager.PlayBallHitPaddle();
+
             Vector3 paddlePosition = this.transform.position;
             Vector2 contactPoint = collision.GetContact(0).point;
 

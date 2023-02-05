@@ -18,8 +18,8 @@ public class Ball : MonoBehaviour
     {
         this.gameManager = FindObjectOfType<GameManager>();
         this.gameManager.UpdateScore();
-        this.speed += (this.gameManager.level / 5) * 100;
-        this.maxVelocity += (this.gameManager.level / 5) * 15;
+        this.speed += (this.gameManager.level / 7) * 100;
+        this.maxVelocity += (this.gameManager.level / 7) * 15;
         ResetBall();
     }
 
