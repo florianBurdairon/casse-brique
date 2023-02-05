@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public new Rigidbody2D rigidbody { get; private set; }
+    public GameManager gameManager;
     public float speed = 500f;
     public float maxVelocity = 15f;
 
@@ -15,7 +16,10 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<GameManager>().UpdateScore();
+        this.gameManager = FindObjectOfType<GameManager>();
+        this.gameManager.UpdateScore();
+        this.speed += (this.gameManager.level / 5) * 100;
+        this.maxVelocity += (this.gameManager.level / 5) * 15;
         ResetBall();
     }
 
