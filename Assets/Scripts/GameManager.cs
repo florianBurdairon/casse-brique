@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
     public Text scoreNLives { get; private set; }
 
     public SoundManager soundManager { get; private set; }
+    public GameObject exit;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);;
+        DontDestroyOnLoad(exit);
 
         SceneManager.sceneLoaded += OnLevelLoaded;
     }
